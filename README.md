@@ -24,7 +24,18 @@
 
 1. 安装node.js并配置全局变量
 
-2. 安装nginx
+2. 安装nginx并配置
+upstream nuxtserver {
+  server 127.0.0.1:3000;
+  keepalive 64;
+}
+server {
+  listen     80;
+  server_name localhost;
+  location /{
+    proxy_pass http://nuxtserver
+  }
+}
 
 3. 安装pm2
 
